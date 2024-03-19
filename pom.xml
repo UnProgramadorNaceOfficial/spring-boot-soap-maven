@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.10</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.soap</groupId>
+    <artifactId>SpringBootSoap</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>SpringBootSoap</name>
+    <description>Spring Boot Soap Client</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.14.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaLanguage>WSDL</schemaLanguage>
+                    <generateDirectory>${project.basedir}/src/main/java</generateDirectory>
+                    <generatePackage>com.soap.wsdl</generatePackage>
+                    <schemas>
+                        <schema>
+                            <url>http://www.dneonline.com/calculator.asmx?WSDL</url>
+                        </schema>
+                    </schemas>
+                </configuration>
+
+                <!--	Confioguracion para archivos WSDL fisicos-->
+                <!--				<configuration>-->
+                <!--					<schemaLanguage>WSDL</schemaLanguage>-->
+                <!--					<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>-->
+                <!--					<schemas>-->
+                <!--						<schemaFiles>CalculatorApi.wsdl</schemaFiles>-->
+                <!--						<packageName>com.soap.wsdl</packageName>-->
+                <!--						<outputDirectory>${project.basedir}/src/main/java</outputDirectory>-->
+                <!--					</schemas>-->
+                <!--				</configuration>-->
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
